@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>خلية عهد | منيو إلكتروني</title>
+<meta name="description" content="المنيو الإلكتروني لمحل الحلويات خلية عهد">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%231F3B33'/%3E%3Cpath d='M4 13c3.5-1 6-4.5 7-9.5C12 8.5 14.5 12 18 13c-3.5 1.7-7 .8-7-1.7 0 2.5-3.5 3.4-7 1.7Z' fill='%23C9A05C'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- ============ الهيدر ============ -->
+<header class="site-header" dir="rtl">
+  <!-- طبقة الوسائط والخلفية -->
+  <div class="header-media" aria-hidden="true">
+    <img src="./images/hf_20260917_092335_d88a5b2f-529b-4dcc-96f0-de9481d6ad16.png" alt="" decoding="async">
+    <span class="header-vignette"></span>
+    <span class="header-fade"></span>
+  </div>
+
+  <!-- محتوى الهيدر -->
+  <div class="header-inner">
+    <div class="brand">
+      <span class="brand-name">خلية عهد</span>
+      <img width="22" height="22" src="https://img.icons8.com/forma-thin-filled/48/bee.png" alt="bee"/>
+    </div>
+
+    <div class="status-cluster">
+      <span class="status-dot" id="statusDot" aria-hidden="true"></span>
+      <span class="status-text">
+        <span class="state" id="statusState">—</span>
+        <span class="hours" id="statusHours">—</span>
+      </span>
+    </div>
+  </div>
+</header>
+
+<!-- ============ البحث + المفضلة ============ -->
+<div class="util-bar">
+  <div class="search-wrap">
+    <input type="search" id="searchInput" placeholder="ابحث عن صنف..." aria-label="ابحث عن صنف">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  </div>
+  <button type="button" class="fav-toggle" id="favToggle" aria-pressed="false" aria-label="عرض المفضلة">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8Z"/></svg>
+    <span class="fav-count" id="favCount">0</span>
+  </button>
+</div>
+
+<!-- ============ تبويبات الأقسام ============ -->
+<nav class="tabs-nav" aria-label="أقسام المنيو">
+  <button type="button" class="tabs-arrow tabs-arrow-right" id="tabsArrowRight" aria-label="الأقسام السابقة">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+  </button>
+  <div class="tabs-scroll" id="tabsScroll"></div>
+  <button type="button" class="tabs-arrow tabs-arrow-left" id="tabsArrowLeft" aria-label="المزيد من الأقسام">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+  </button>
+</nav>
+
+<!-- ============ زرا التبديل بين طريقة عرض المنتجات ============ -->
+<div class="view-toggle-bar">
+  <div class="view-toggle" id="viewToggle" role="group" aria-label="طريقة عرض المنتجات">
+    <button type="button" class="view-toggle-btn" id="listViewBtn" data-view="list" aria-pressed="false" title="عرض قائمة">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      <span>قائمة</span>
+    </button>
+    <button type="button" class="view-toggle-btn is-active" id="gridViewBtn" data-view="grid" aria-pressed="true" title="عرض شبكي">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+      <span>شبكي</span>
+    </button>
+  </div>
+</div>
+
+<!-- ============ محتوى المنيو (يُبنى ديناميكيًا من Firestore) ============ -->
+<main class="menu-main" id="menuMain"></main>
+
+<!-- ============ معلومات المحل ============ -->
+<section class="store-info" id="storeInfo">
+  <div class="store-info-inner">
+    <h2>معلومات المحل</h2>
+    <table class="hours-table" id="hoursTable" aria-label="ساعات العمل الأسبوعية"></table>
+    <div class="store-actions">
+      <a class="store-action-btn" id="callBtn" href="#">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.2-1.3a2 2 0 0 1 2.1-.5c.9.3 1.9.6 2.9.7a2 2 0 0 1 1.8 2.1Z"/></svg>
+        اتصال مباشر
+      </a>
+      <a class="store-action-btn" id="mapBtn" href="#" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+        الموقع على الخريطة
+      </a>
+      <a class="store-action-btn" id="instaBtn" href="#" target="_blank" rel="noopener" aria-label="إنستقرام">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h3l1.5-2h7L17 8h3v11H4V8Z"/><circle cx="12" cy="13.5" r="3.5"/></svg>
+      انستقرام
+      </a>
+      <a class="store-action-btn" id="snapBtn" href="#" target="_blank" rel="noopener" aria-label="سناب شات">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 20V11a7 7 0 0 1 14 0v9l-2.3-1.6L14.5 20l-2.5-1.6L9.5 20l-2.2-1.6L5 20Z"/><circle cx="9.5" cy="11" r="1"/><circle cx="14.5" cy="11" r="1"/></svg>
+      سناب شات
+      </a>
+          </div>
+  </div>
+  <footer>
+    <div>
+      <p class="legal">الأسعار بالريال السعودي وشاملة ضريبة القيمة المضافة. السعرات الحرارية تقديرية.</p>
+    </div>
+  </footer>
+</section>
+
+<!-- ============ الزر العائم لإرسال الطلب عبر واتساب ============ -->
+<button type="button" class="cart-fab" id="cartFab" aria-label="عرض الطلب وإرساله عبر واتساب">
+  <span class="cart-fab-left">
+    <span class="cart-fab-icon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.28-1.38a9.9 9.9 0 0 0 4.76 1.21h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Z"/></svg></span>
+    <span class="cart-fab-text">
+      <span class="cart-fab-count" id="cartFabCount">0 أصناف</span>
+      <span class="cart-fab-label">إرسال الطلب عبر واتساب</span>
+    </span>
+  </span>
+  <span class="cart-fab-total" id="cartFabTotal">0 ر.س</span>
+</button>
+
+<!-- ============ Bottom Sheets ============ -->
+<div class="sheet-overlay" id="sheetOverlay"></div>
+<div class="bottom-sheet" id="itemSheet" role="dialog" aria-modal="true" aria-label="تفاصيل الصنف" aria-hidden="true"></div>
+<div class="bottom-sheet" id="cartSheet" role="dialog" aria-modal="true" aria-label="مراجعة الطلب" aria-hidden="true"></div>
+
+<script type="module" src="script.js"></script>
+</body>
+</html>
